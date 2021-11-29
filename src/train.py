@@ -48,8 +48,7 @@ def training():
     net = ResNet10().to(CONFIG['device'])
 
     if CONFIG['use_pretrained']:
-        checkpoint = torch.load(CONFIG['pretrained_model_path'])
-        net.load_state_dict(checkpoint['model_state_dict'])
+        net = torch.load(CONFIG['pretrained_model_path'])
     criterion = nn.CrossEntropyLoss()
     optimiser = optim.SGD(net.parameters(), lr=CONFIG['learning_rate'], momentum=CONFIG['momentum'], weight_decay=CONFIG['weight_decay'])
 
