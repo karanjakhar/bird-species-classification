@@ -1,11 +1,11 @@
-Bird Classification
+Bird Classification   
 
-Environment Setup
+Environment Setup        
 
-conda create -n bird_clf python=3.7
-conda activate bird_clf
-cd bird_species_classification
-pip install -r requirements.txt
+conda create -n bird_clf python=3.7    
+conda activate bird_clf    
+cd bird_species_classification   
+pip install -r requirements.txt       
 
 
 Training

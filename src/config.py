@@ -10,6 +10,8 @@ CONFIG = {
     'weight_decay':0,
     'save_weights_epoch': 100,
     'batch_size':8,
-    'best_validation_accuracy': 0
+    'best_validation_accuracy': 0,
+    'pretrained_model_path': '../model/last.pth',
+    'use_pretrained': False
 }
 wandb.config = CONFIG
