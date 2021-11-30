@@ -7,28 +7,41 @@ import torch
 import pandas as pd
 from config import CONFIG
 
+
 def imshow(img):
     img = (img * 0.5) + 0.5
     npimg = img.numpy()
-    plt.imshow(np.transpose(npimg,(1,2,0)))
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
-
 
 
 class_dict = pd.read_csv('../data/class_dict.csv')
 classes = class_dict['class']
 
-transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+transform = transforms.Compose([transforms.ToTensor(),
+                                transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[
+                                                     0.229, 0.224, 0.225]),
+                                transforms.RandomVerticalFlip(),
+                                transforms.RandomAdjustSharpness(2),
+                                transforms.RandomAutocontrast(),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ColorJitter(brightness=3,contrast=4,saturation=2,hue=0.5)
+                                ])
 
 
-bird_dataset_train = torchvision.datasets.ImageFolder('../data/train',transform=transform)
-bird_dataset_valid = torchvision.datasets.ImageFolder('../data/valid/',transform=transform)
-bird_test_dataset = torchvision.datasets.ImageFolder('../data/test/', transform=transform)
+bird_dataset_train = torchvision.datasets.ImageFolder(
+    '../data/train', transform=transform)
+bird_dataset_valid = torchvision.datasets.ImageFolder(
+    '../data/valid/', transform=transform)
+bird_test_dataset = torchvision.datasets.ImageFolder(
+    '../data/test/', transform=transform)
 
-bird_train_dataloader = torch.utils.data.DataLoader(bird_dataset_train,batch_size=CONFIG['batch_size'])
-bird_valid_dataloader = torch.utils.data.DataLoader(bird_dataset_valid,batch_size=CONFIG['batch_size'])
-bird_test_dataloader = torch.utils.data.DataLoader(bird_test_dataset, batch_size=CONFIG['batch_size'])
-
+bird_train_dataloader = torch.utils.data.DataLoader(
+    bird_dataset_train, batch_size=CONFIG['batch_size'])
+bird_valid_dataloader = torch.utils.data.DataLoader(
+    bird_dataset_valid, batch_size=CONFIG['batch_size'])
+bird_test_dataloader = torch.utils.data.DataLoader(
+    bird_test_dataset, batch_size=CONFIG['batch_size'])
 
 
 if __name__ == '__main__':

@@ -47,6 +47,7 @@ class ResNet10(nn.Module):
         self.conv4 = ResidualBlock(256,512,isdownsample=True,stride=2)
         self.avgpool = nn.AvgPool2d(7,stride=1)
         self.fc1 = nn.Linear(512,315)
+        self.dropout = nn.Dropout(p=0.2)
         
         
     
@@ -58,6 +59,7 @@ class ResNet10(nn.Module):
         x = self.conv4(x)
         x = self.avgpool(x)
         x = x.view(x.size(0),-1)
+        #x = self.dropout(x)
         #print(x.size())
         x = self.fc1(x)
         return x
