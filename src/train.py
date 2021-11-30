@@ -3,6 +3,7 @@ from torch import optim
 from torch.cuda.memory import reset_accumulated_memory_stats 
 from model import ResNet10
 from data import bird_train_dataloader,bird_valid_dataloader
+from data import mnist_train_dataloader, mnist_valid_dataloader
 import torch
 from config import CONFIG
 from tqdm import tqdm
